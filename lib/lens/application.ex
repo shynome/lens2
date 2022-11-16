@@ -13,7 +13,8 @@ defmodule Lens.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: Lens.PubSub},
       # Start the Endpoint (http/https)
-      LensWeb.Endpoint
+      LensWeb.Endpoint,
+      Lens.Signaler.Hub
       # Start a worker by calling: Lens.Worker.start_link(arg)
       # {Lens.Worker, arg}
     ]

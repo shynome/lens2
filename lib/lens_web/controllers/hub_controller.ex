@@ -7,6 +7,7 @@ defmodule LensWeb.HubController do
   alias Phoenix.Socket.Broadcast
 
   plug :auth
+  plug :check_pass when action in [:index]
 
   action_fallback LensWeb.FallbackController
 
@@ -63,6 +64,16 @@ defmodule LensWeb.HubController do
       |> assign(:pass, "#{pass}")
     else
       _ -> conn |> Plug.BasicAuth.request_basic_auth() |> halt()
+    end
+  end
+
+  defp check_pass(%{assigns: %{user: user, pass: pass}} = conn, _opts) do
+    {_luser, lpass} = Hub.get(user, pass)
+
+    if lpass != pass do
+      conn |> send_resp(403, "") |> halt()
+    else
+      conn
     end
   end
 end
