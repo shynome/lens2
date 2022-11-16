@@ -9,6 +9,7 @@ import Config
 
 # Configures the endpoint
 config :lens, LensWeb.Endpoint,
+http: [protocol_options: [idle_timeout: :infinity]],
   url: [host: "localhost"],
   render_errors: [view: LensWeb.ErrorView, accepts: ~w(json), layout: false],
   pubsub_server: Lens.PubSub,

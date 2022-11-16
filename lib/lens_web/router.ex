@@ -2,11 +2,15 @@ defmodule LensWeb.Router do
   use LensWeb, :router
 
   pipeline :api do
-    plug :accepts, ["json"]
+    # plug :accepts, ["json"]
   end
 
-  scope "/api", LensWeb do
+  scope "/", LensWeb do
     pipe_through :api
+
+    get "/", HubController, :index
+    post "/", HubController, :create
+    delete "/", HubController, :delete
   end
 
   # Enables LiveDashboard only for development
