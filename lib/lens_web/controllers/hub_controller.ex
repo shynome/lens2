@@ -17,7 +17,13 @@ defmodule LensWeb.HubController do
     conn
     |> put_resp_content_type("text/event-stream")
     |> send_chunked(200)
+    |> hacky_caddy()
     |> send_tasks()
+  end
+
+  defp hacky_caddy(conn) do
+    conn |> chunk(": a hack comment for pass caddy\n\n")
+    conn
   end
 
   defp send_tasks(conn) do
