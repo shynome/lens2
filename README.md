@@ -1,18 +1,48 @@
-# Lens
+## 一个简易消息传递服务
 
-To start your Phoenix server:
+原始目标是 webrtc 的信令服务器, 但后面想了想, 其实可以做成简易的消息传递服务,
+于是提取出来了作为单独的一个库/标准.
 
-  * Install dependencies with `mix deps.get`
-  * Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+是 <https://github.com/rabbitmq/amqp091-go> 的简化版/弱化版
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+### 使用
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+```sh
+# subscribe task and dial
+curl -i https://test:test@signaler.slive.fun?t=q
+# call task and get result
+curl -i -X POST https://test@signaler.slive.fun?t=q -d "req body\n"
+# dial task with id from subscribe
+curl -i -X DELETE https://test@signaler.slive.fun?t=q -d "res body\n" -H 'X-Event-ID: xxxxxx'
+```
 
-## Learn more
+**注意:** 该服务器仅用于测试, 请勿依赖该服务器作为生产用途
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+### 启动信令服务器
+
+```sh
+# 开发用
+mix phx.server
+
+# build for prod
+MIX_ENV=prod mix release
+# copy to your service directory
+rsync -Pr --checksum _build/prod/rel/lens/ /opt/lens/
+```
+
+```toml
+#/etc/systemd/system/lens.service
+# systemd service example
+[Unit]
+Description=lens signaler server
+After=network.target
+
+[Service]
+ExecStart=/opt/lens/bin/lens start
+Restart=always
+Environment="SECRET_KEY_BASE=xxxxxxxx"
+Environment="PHX_SERVER=1"
+
+[Install]
+WantedBy=default.target
+```
