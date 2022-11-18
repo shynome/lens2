@@ -30,7 +30,7 @@ MIX_ENV=prod mix release
 rsync -Pr --checksum _build/prod/rel/lens/ /opt/lens/
 ```
 
-```toml
+```service
 #/etc/systemd/system/lens.service
 # systemd service example
 [Unit]
