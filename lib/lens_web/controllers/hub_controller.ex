@@ -6,7 +6,7 @@ defmodule LensWeb.HubController do
   alias LensWeb.Signaler.Event
   alias Phoenix.Socket.Broadcast
 
-  plug :auth
+  plug :auth when action not in [:options]
   plug :check_pass when action in [:index]
 
   action_fallback LensWeb.FallbackController
@@ -61,6 +61,11 @@ defmodule LensWeb.HubController do
 
     LensWeb.Endpoint.broadcast!(tid, "resp", body)
 
+    conn
+    |> send_resp(204, "")
+  end
+
+  def options(conn, _params) do
     conn
     |> send_resp(204, "")
   end

@@ -12,6 +12,7 @@ defmodule LensWeb.Router do
     get "/", HubController, :index
     post "/", HubController, :create
     delete "/", HubController, :delete
+    options "/", HubController, :options
   end
 
   # Enables LiveDashboard only for development
