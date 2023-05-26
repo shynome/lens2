@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.1] - 2023-05-26
+
+### Fix
+
+- add route when OPTIONS request, now it will send preflight in browser not 404
+
 ## [0.2.0] - 2023-04-13
 
 ### Improve
