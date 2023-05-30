@@ -3,7 +3,22 @@ defmodule LensWeb.Router do
 
   pipeline :api do
     # plug :accepts, ["json"]
-    plug CORSPlug
+    plug CORSPlug,
+      headers: [
+        "Authorization",
+        "Content-Type",
+        "Accept",
+        "Origin",
+        "User-Agent",
+        "DNT",
+        "Cache-Control",
+        "X-Mx-ReqToken",
+        "Keep-Alive",
+        "X-Requested-With",
+        "If-Modified-Since",
+        "X-CSRF-Token",
+        "x-event-id"
+      ]
   end
 
   scope "/", LensWeb do
