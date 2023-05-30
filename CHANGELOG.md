@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.2] - 2023-05-30
+
+### Fix
+
+- http access-allow-header add `x-event-id`, now you can dial task in browser
+
 ## [0.2.1] - 2023-05-26
 
 ### Fix
