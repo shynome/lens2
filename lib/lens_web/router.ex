@@ -17,7 +17,7 @@ defmodule LensWeb.Router do
         "X-Requested-With",
         "If-Modified-Since",
         "X-CSRF-Token",
-        "x-event-id"
+        "X-Event-ID"
       ]
   end
 
