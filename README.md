@@ -13,7 +13,7 @@ curl -i https://test:test@signaler.slive.fun?t=q
 # call task and get result
 curl -i -X POST https://test@signaler.slive.fun?t=q -d "req body\n"
 # dial task with id from subscribe
-curl -i -X DELETE https://test@signaler.slive.fun?t=q -d "res body\n" -H 'X-Event-ID: xxxxxx'
+curl -i -X DELETE https://test@signaler.slive.fun?t=q -d "res body\n" -H 'X-CSRF-Token: xxxxxx'
 ```
 
 **注意:** 该服务器仅用于测试, 请勿依赖该服务器作为生产用途

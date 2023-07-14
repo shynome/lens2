@@ -56,7 +56,7 @@ defmodule LensWeb.HubController do
   end
 
   def delete(conn, _params) do
-    [tid | _] = get_req_header(conn, "x-event-id")
+    [tid | _] = get_req_header(conn, "x-csrf-token")
     {:ok, body, _} = read_body(conn)
 
     LensWeb.Endpoint.broadcast!(tid, "resp", body)
