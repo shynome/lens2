@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.3.0] - 2023-07-15
+
+### Change
+
+- 使用 `X-CSRF-Token` 替代 `X-Event-ID`, `X-CSRF-Token` 是默认 cors 添加的请求头
+
 ## [0.2.2] - 2023-05-30
 
 ### Fix
